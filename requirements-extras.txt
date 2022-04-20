@@ -1,0 +1,5 @@
+# example.py
+matplotlib==3.5.1
+#jupyter==1.0.0
+jupyterlab==3.3.2
+jupyter-nbextensions-configurator==0.4.1

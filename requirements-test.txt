@@ -1,0 +1,9 @@
+# generic
+importlib-metadata==4.2
+pytest==7.0.1
+pytest-cov==3.0.0
+pytest-flake8==1.0.7
+pytest-mypy==0.9.1
+tox==3.24.5
+tox-wheel==0.7.0
+types-requests==2.27.7
