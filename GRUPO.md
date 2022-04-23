@@ -1,1 +1,3 @@
-Integrante del grupo: Julio Isaí Marulanda Marín
+# Integrande del grupo
+
+Julio Isaí Marulanda Marín
