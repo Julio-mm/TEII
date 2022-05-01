@@ -9,14 +9,18 @@ import teii.finance as tf
 
 def setup_logging(logging_level):
     """ Crea y configura logger. """
-
     # TODO
     #   Configura logging para enviar la salida a un archivo
 
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    # Solucion ejercicio 1
+
+    logging.basicConfig(filename='example.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger = logging.getLogger(__name__)
     logger.setLevel(logging_level)
     logger.info("Logger creado")
+
+    
 
     return logger
 
@@ -34,7 +38,6 @@ def main():
     """ Muestra como usar teii-finance. """
 
     logger = setup_logging(logging.WARNING)
-
     logger.info("Inicio")
 
     # Define ticker y API key
