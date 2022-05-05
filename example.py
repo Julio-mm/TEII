@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 import teii.finance as tf
 
+import datetime as dt
+
 
 def setup_logging(logging_level):
     """ Crea y configura logger. """
@@ -55,7 +57,7 @@ def main():
         #   Filtra los datos para mostrar únicamente el año 2021
 
         # Genera una serie de Pandas con precio de cierre semanal
-        pd_series = tf_client.weekly_price()
+        pd_series = tf_client.weekly_price(dt.datetime(2021,1,1),dt.datetime(2021,12,31))
 
         logger.info(pd_series)
 
