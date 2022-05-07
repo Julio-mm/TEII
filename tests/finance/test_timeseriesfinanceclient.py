@@ -67,17 +67,36 @@ def test_weekly_price_dates(api_key_str,
 
 def test_weekly_volume_invalid_dates(api_key_str,
                                      mocked_requests):
-    # TODO
-    pass
-
-
-def test_weekly_volume_no_dates(api_key_str,
-                                mocked_requests):
-    # TODO
-    pass
-
+    with pytest.raises(FinanceClientParamError):
+        
+        fc = TimeSeriesFinanceClient("IBM", api_key_str)
+        fc.weekly_price(dt.date(year=2022, month=1, day=1),
+                        dt.date(year=2021, month=12, day=31))
 
 def test_weekly_volume_dates(api_key_str,
-                             mocked_requests):
-    # TODO
-    pass
+                             mocked_requests,
+                             pandas_series_IBM_volume_filtered):
+
+    fc = TimeSeriesFinanceClient("IBM", api_key_str)
+
+    ps = fc.weekly_volume(dt.date(year=2019, month=1, day=1),
+                          dt.date(year=2021, month=12, day=31))
+    
+    assert ps.count() == 157   # 2019-01-01 to 2021-12-31 (157 business weeks)
+
+    assert ps.count() == pandas_series_IBM_volume_filtered.count()
+
+    assert_series_equal(ps, pandas_series_IBM_volume_filtered)
+
+def test_weekly_volume_no_dates(api_key_str,
+                                mocked_requests,
+                                pandas_series_IBM_volume):
+    fc = TimeSeriesFinanceClient("IBM", api_key_str)
+
+    ps = fc.weekly_volume()
+
+    assert ps.count() == 1162    # 2019-11-01 to 2022-02-11 (1162 business weeks)
+
+    assert ps.count() == pandas_series_IBM_volume.count()
+
+    assert_series_equal(ps, pandas_series_IBM_volume)
