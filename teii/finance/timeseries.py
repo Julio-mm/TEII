@@ -8,6 +8,7 @@ import pandas as pd
 from typing import Optional, Union
 
 from teii.finance import FinanceClientInvalidData
+from teii.finance import FinanceClientParamError
 from teii.finance import FinanceClient
 
 
@@ -103,6 +104,9 @@ class TimeSeriesFinanceClient(FinanceClient):
         # TODO
         #   Comprueba que from_date <= to_date y genera excepción
         #   'FinanceClientParamError' en caso de error
+
+        if from_date is not None and to_date is not None and from_date > to_date:
+            raise FinanceClientParamError("The dates are invalid")
 
         # FIXME: type hint error
         if from_date is not None and to_date is not None:
