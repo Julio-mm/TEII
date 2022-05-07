@@ -44,8 +44,11 @@ class TimeSeriesFinanceClient(FinanceClient):
         #   Comprueba que no se produce ningún error y genera excepción
         #   'FinanceClientInvalidData' en caso de error
 
-        # Build Panda's data frame
-        data_frame = pd.DataFrame.from_dict(self._json_data, orient='index', dtype=float)
+        try:
+            # Build Panda's data frame
+            data_frame = pd.DataFrame.from_dict(self._json_data, orient='index', dtype=float)
+        except Exception as e:
+            raise FinanceClientInvalidData("DataFrame creation error") from e
 
         # Rename data fields
         data_frame = data_frame.rename(columns={key: name_type[0]
