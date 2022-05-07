@@ -27,8 +27,7 @@ def test_constructor_invalid_data(api_key_str,
         TimeSeriesFinanceClient("NODATA", api_key_str)
 
 def test_weekly_price_invalid_dates(api_key_str,
-                                    mocked_requests,
-                                    pandas_series_IBM_prices):
+                                    mocked_requests):
     with pytest.raises(FinanceClientParamError):
         fc = TimeSeriesFinanceClient("IBM", api_key_str)
 
@@ -66,9 +65,13 @@ def test_weekly_price_dates(api_key_str,
 
 
 def test_weekly_volume_invalid_dates(api_key_str,
-                                     mocked_requests):
-    # TODO
-    pass
+                                     mocked_requests,
+                                     pandas_series_IBM_prices):
+    with pytest.raises(FinanceClientParamError):
+        fc = TimeSeriesFinanceClient("IBM", api_key_str)
+
+        fc.weekly_price(dt.date(year=2022, month=1, day=1),
+                        dt.date(year=2021, month=12, day=31))
 
 
 def test_weekly_volume_no_dates(api_key_str,
