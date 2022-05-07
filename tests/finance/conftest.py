@@ -51,3 +51,17 @@ def pandas_series_IBM_prices_filtered():
         df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
         ds = df['aclose']
     return ds
+
+@fixture(scope='package')
+def pandas_series_IBM_volume():
+    with resources.path('teii.finance.data', 'TIME_SERIES_WEEKLY_ADJUSTED.IBM.volume.unfiltered.csv') as path2csv:
+        df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
+        ds = df['volume']
+    return ds
+
+@fixture(scope='package')
+def pandas_series_IBM_volume_filtered():
+    with resources.path('teii.finance.data', 'TIME_SERIES_WEEKLY_ADJUSTED.IBM.volume.filtered.csv') as path2csv:
+        df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
+        ds = df['volume']
+    return ds
