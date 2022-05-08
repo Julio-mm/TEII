@@ -127,3 +127,23 @@ class TimeSeriesFinanceClient(FinanceClient):
             series = series.loc[from_date:to_date]   # type: ignore
 
         return series
+
+    def yearly_dividends(self,
+                         from_year: Optional[int] = None,
+                         to_year: Optional[int] = None) -> pd.Series:
+        """ Return yearly dividends 'from_year' to 'to_year'. """
+
+        assert self._data_frame is not None
+
+        series = self._data_frame.groupby(self._data_frame.index.year)
+        series = series['dividend'].apply(pd.DataFrame).sum()
+        series.index = pd.to_datetime(series.index, format='%Y')
+        series = series.rename( 'dividend' )
+
+        if from_year is not None and to_year is not None and from_year > to_year:
+            raise FinanceClientParamError("The dates are invalid")
+
+        if from_year is not None and to_year is not None:
+            series = series.loc[from_year:to_year]
+
+        return series

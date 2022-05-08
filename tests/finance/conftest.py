@@ -65,3 +65,17 @@ def pandas_series_IBM_volume_filtered():
         df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
         ds = df['volume']
     return ds
+
+@fixture(scope='package')
+def pandas_series_IBM_yearly_dividends():
+    with resources.path('teii.finance.data', 'TIME_SERIES_WEEKLY_ADJUSTED.IBM.yearly_dividend.unfiltered.csv') as path2csv:
+        df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
+        ds = df['dividend']
+    return ds
+
+@fixture(scope='package')
+def pandas_series_IBM_yearly_dividends_filtered():
+    with resources.path('teii.finance.data', 'TIME_SERIES_WEEKLY_ADJUSTED.IBM.yearly_dividend.filtered.csv') as path2csv:
+        df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
+        ds = df['dividend']
+    return ds
