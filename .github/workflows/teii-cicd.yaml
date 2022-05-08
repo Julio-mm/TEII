@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  test-package-ubuntu-20.04:
+  test-package-ubuntu20-04:
     # The type of runner that the job will run on
     runs-on: [ubuntu-20.04]
     strategy:
@@ -44,7 +44,7 @@ jobs:
       run: |
         tox -e py
 
-  test-package-ubuntu-18.04:
+  test-package-ubuntu18-04:
     # The type of runner that the job will run on
     runs-on: [ubuntu-18.04]
     strategy:
