@@ -13,9 +13,38 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains two jobs called "test-package" and "build-and-publish-package"
 
-  test-package:
+  test-package-ubuntu-20.04:
+    # The type of runner that the job will run on
+    runs-on: [ubuntu-20.04]
+    strategy:
+      matrix:
+        # Versions python
+        python-version: ["3.7", "3.8", "3.9"]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Sets up python version
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    # Installs tox
+    - name: Install tox y tox-wheel
+      run: |
+        pip install tox tox-wheel
+
+    # Runs tox
+    - name: Run flake8, mypy and pytest with tox
+      run: |
+        tox -e py
+
+  test-package-ubuntu-18.04:
     # The type of runner that the job will run on
     runs-on: [ubuntu-18.04]
     strategy:
