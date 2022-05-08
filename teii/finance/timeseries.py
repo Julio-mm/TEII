@@ -95,7 +95,26 @@ class TimeSeriesFinanceClient(FinanceClient):
     def weekly_price(self,
                      from_date: Optional[dt.date] = None,
                      to_date: Optional[dt.date] = None) -> pd.Series:
-        """ Return weekly close price from 'from_date' to 'to_date'. """
+        """ Return weekly close price from 'from_date' to 'to_date'.
+        
+        Parameters
+        ----------
+        from_year : Optional[int]
+            The year since the filter starts.
+        to_year : Optional[int]
+            The last year of the filter,
+
+        Returns
+        -------
+        series
+            series with the weekly price from_year to_year
+
+        Raise
+        -------
+        FinanceClientParamError
+            If from_year is greater than to_year
+
+        """
 
         assert self._data_frame is not None
 
@@ -116,7 +135,26 @@ class TimeSeriesFinanceClient(FinanceClient):
     def weekly_volume(self,
                       from_date: Optional[dt.date] = None,
                       to_date: Optional[dt.date] = None) -> pd.Series:
-        """ Return weekly volume from 'from_date' to 'to_date'. """
+        """ Return weekly volume 'from_year' to 'to_year'. 
+        
+        Parameters
+        ----------
+        from_year : Optional[int]
+            The year since the filter starts.
+        to_year : Optional[int]
+            The last year of the filter,
+
+        Returns
+        -------
+        series
+            series with the weekly volume from_year to_year
+
+        Raise
+        -------
+        FinanceClientParamError
+            If from_year is greater than to_year
+
+        """
 
         assert self._data_frame is not None
         self._logger.info("Dataframe is valid")
@@ -136,7 +174,26 @@ class TimeSeriesFinanceClient(FinanceClient):
     def yearly_dividends(self,
                          from_year: Optional[int] = None,
                          to_year: Optional[int] = None) -> pd.Series:
-        """ Return yearly dividends 'from_year' to 'to_year'. """
+        """ Return yearly dividends 'from_year' to 'to_year'. 
+        
+        Parameters
+        ----------
+        from_year : Optional[int]
+            The year since the filter starts.
+        to_year : Optional[int]
+            The last year of the filter,
+
+        Returns
+        -------
+        series
+            series r
+
+        Raise
+        -------
+        FinanceClientParamError
+            If from_year is greater than to_year
+
+        """
 
         assert self._data_frame is not None
         self._logger.info("Dataframe is valid")
@@ -158,7 +215,26 @@ class TimeSeriesFinanceClient(FinanceClient):
     def highest_weekly_variation(self,
                                  from_year: Optional[int] = None,
                                  to_year: Optional[int] = None) -> pd.Series:
-        """ Calculate the date there was a greater variation in the price of the ticker """
+        """ Calculate the date there was a greater variation in the price of the ticker
+
+        Parameters
+        ----------
+        from_year : Optional[int]
+            The year since the filter starts.
+        to_year : Optional[int]
+            The last year of the filter,
+
+        Returns
+        -------
+        tuple
+            tuple with the values of the column that meets the condition
+
+        Raise
+        -------
+        FinanceClientParamError
+            If from_year is greater than to_year
+
+        """
 
         assert self._data_frame is not None
         self._logger.info("Dataframe is valid")
