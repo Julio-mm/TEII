@@ -163,8 +163,7 @@ class TimeSeriesFinanceClient(FinanceClient):
         if from_year is not None and to_year is not None:
             series = series.loc[from_year:to_year]
 
-        #series.loc['diference'] = series['high'] - series['low']
-        series['diference'] = series.apply(lambda row: row['high'] - row['low'], axis=1)
+        series['diference'] = series['high'] - series['low']
         row = series[series['diference'] == series['diference'].max()][['high', 'low', 'diference']]
         row = row.to_records()
         tuple = (pd.to_datetime(row[0][0]), row[0][1].astype(float),
