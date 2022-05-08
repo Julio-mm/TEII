@@ -20,6 +20,7 @@ jobs:
     runs-on: [ubuntu-latest, ubuntu-18.04]
     strategy:
       matrix:
+        # Versions python
         python-version: ["3.7", "3.8", "3.9"]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -30,7 +31,7 @@ jobs:
 
     # Sets up python version
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
 
