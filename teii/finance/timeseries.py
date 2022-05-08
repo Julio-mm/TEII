@@ -138,7 +138,7 @@ class TimeSeriesFinanceClient(FinanceClient):
         series = self._data_frame.groupby(self._data_frame.index.year)
         series = series['dividend'].apply(pd.DataFrame).sum()
         series.index = pd.to_datetime(series.index, format='%Y')
-        series = series.rename( 'dividend' )
+        series = series.rename('dividend')
 
         if from_year is not None and to_year is not None and from_year > to_year:
             raise FinanceClientParamError("The dates are invalid")
