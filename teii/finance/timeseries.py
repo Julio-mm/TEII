@@ -99,10 +99,13 @@ class TimeSeriesFinanceClient(FinanceClient):
 
         assert self._data_frame is not None
 
+        self._logger.info("Dataframe is valid")
         series = self._data_frame['aclose']
 
         if from_date is not None and to_date is not None and from_date > to_date:
             raise FinanceClientParamError("The dates are invalid")
+        else:
+            self._logger.info("weekly_price valid dates")
 
         # FIXME: type hint error
         if from_date is not None and to_date is not None:
@@ -116,11 +119,13 @@ class TimeSeriesFinanceClient(FinanceClient):
         """ Return weekly volume from 'from_date' to 'to_date'. """
 
         assert self._data_frame is not None
-
+        self._logger.info("Dataframe is valid")
         series = self._data_frame['volume']
 
         if from_date is not None and to_date is not None and from_date > to_date:
             raise FinanceClientParamError("The dates are invalid")
+        else:
+            self._logger.info("weekly_volume valid dates")
 
         # FIXME: type hint error
         if from_date is not None and to_date is not None:
@@ -134,7 +139,7 @@ class TimeSeriesFinanceClient(FinanceClient):
         """ Return yearly dividends 'from_year' to 'to_year'. """
 
         assert self._data_frame is not None
-
+        self._logger.info("Dataframe is valid")
         series = self._data_frame.groupby(self._data_frame.index.year)
         series = series['dividend'].apply(pd.DataFrame).sum()
         series.index = pd.to_datetime(series.index, format='%Y')
@@ -142,6 +147,8 @@ class TimeSeriesFinanceClient(FinanceClient):
 
         if from_year is not None and to_year is not None and from_year > to_year:
             raise FinanceClientParamError("The dates are invalid")
+        else:
+            self._logger.info("yearly_dividends valid dates")
 
         if from_year is not None and to_year is not None:
             series = series.loc[from_year:to_year]
@@ -154,11 +161,13 @@ class TimeSeriesFinanceClient(FinanceClient):
         """ Calculate the date there was a greater variation in the price of the ticker """
 
         assert self._data_frame is not None
-
+        self._logger.info("Dataframe is valid")
         series = self._data_frame
 
         if from_year is not None and to_year is not None and from_year > to_year:
             raise FinanceClientParamError("The dates are invalid")
+        else:
+            self._logger.info("highest_weekly_variation valid dates")
 
         if from_year is not None and to_year is not None:
             series = series.loc[from_year:to_year]
