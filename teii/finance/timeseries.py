@@ -96,7 +96,7 @@ class TimeSeriesFinanceClient(FinanceClient):
                      from_date: Optional[dt.date] = None,
                      to_date: Optional[dt.date] = None) -> pd.Series:
         """ Return weekly close price from 'from_date' to 'to_date'.
-        
+
         Parameters
         ----------
         from_year : Optional[int]
@@ -135,8 +135,8 @@ class TimeSeriesFinanceClient(FinanceClient):
     def weekly_volume(self,
                       from_date: Optional[dt.date] = None,
                       to_date: Optional[dt.date] = None) -> pd.Series:
-        """ Return weekly volume 'from_year' to 'to_year'. 
-        
+        """ Return weekly volume 'from_year' to 'to_year'.
+
         Parameters
         ----------
         from_year : Optional[int]
@@ -174,8 +174,8 @@ class TimeSeriesFinanceClient(FinanceClient):
     def yearly_dividends(self,
                          from_year: Optional[int] = None,
                          to_year: Optional[int] = None) -> pd.Series:
-        """ Return yearly dividends 'from_year' to 'to_year'. 
-        
+        """ Return yearly dividends 'from_year' to 'to_year'.
+
         Parameters
         ----------
         from_year : Optional[int]
