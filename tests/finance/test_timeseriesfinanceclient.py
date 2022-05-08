@@ -135,3 +135,36 @@ def test_yearly_dividends_dates(api_key_str,
 
     assert_series_equal(ps,pandas_series_IBM_yearly_dividends_filtered)
 
+def test_highest_weekly_variation_invalid_dates(api_key_str,
+                                                 mocked_requests):
+    with pytest.raises(FinanceClientParamError):
+
+        fc = TimeSeriesFinanceClient("IBM", api_key_str)
+        
+        fc.highest_weekly_variation(dt.date(year=2022, month=1, day=1),
+                                    dt.date(year=2021, month=12, day=31))
+
+def test_highest_weekly_variation_dates(api_key_str,
+                                             mocked_requests,
+                                             tuple_highest_weekly_variation_filtered):
+
+    fc = TimeSeriesFinanceClient("IBM", api_key_str)
+
+    tuple = fc.highest_weekly_variation(dt.date(year=2015, month=1, day=1),
+                                         dt.date(year=2019, month=12, day=31))
+
+    assert tuple == tuple_highest_weekly_variation_filtered # cumple la salida del enunciado
+
+def test_highest_weekly_variation_no_dates(api_key_str,
+                                             mocked_requests,
+                                             tuple_highest_weekly_variation):
+
+    fc = TimeSeriesFinanceClient("IBM", api_key_str)
+
+    tuple = fc.highest_weekly_variation()
+
+    assert tuple == tuple_highest_weekly_variation # cumple la salida del enunciado
+
+
+
+

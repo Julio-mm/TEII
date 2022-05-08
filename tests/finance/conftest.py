@@ -79,3 +79,23 @@ def pandas_series_IBM_yearly_dividends_filtered():
         df = pd.read_csv(path2csv, index_col=0, parse_dates=True)
         ds = df['dividend']
     return ds
+
+@fixture(scope='package')
+def tuple_highest_weekly_variation():
+    date = '2020-03-13 00:00:00'
+    date = pd.to_datetime(date)
+    high = 124.88
+    low = 100.81
+    diff = 24.069999999999993
+    tuple = (date,high,low,diff)
+    return tuple
+
+@fixture(scope='package')
+def tuple_highest_weekly_variation_filtered():
+    date = '2018-04-20 00:00:00'
+    date = pd.to_datetime(date)
+    high = 162.0
+    low = 144.51
+    diff = 17.49000000000001
+    tuple = (date,high,low,diff)
+    return tuple

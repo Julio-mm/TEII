@@ -147,3 +147,27 @@ class TimeSeriesFinanceClient(FinanceClient):
             series = series.loc[from_year:to_year]
 
         return series
+
+    def highest_weekly_variation(self,
+                                 from_year: Optional[int] = None,
+                                 to_year: Optional[int] = None) -> pd.Series:
+        """ Calculate the date there was a greater variation in the price of the ticker """
+
+        assert self._data_frame is not None
+
+        series = self._data_frame
+
+        if from_year is not None and to_year is not None and from_year > to_year:
+            raise FinanceClientParamError("The dates are invalid")
+
+        if from_year is not None and to_year is not None:
+            series = series.loc[from_year:to_year]
+
+        #series.loc['diference'] = series['high'] - series['low']
+        series['diference'] = series.apply(lambda row: row['high'] - row['low'], axis=1)
+        row = series[series['diference'] == series['diference'].max()][['high', 'low', 'diference']]
+        row = row.to_records()
+        tuple = (pd.to_datetime(row[0][0]), row[0][1].astype(float),
+                 row[0][2].astype(float), row[0][3].astype(float))
+
+        return tuple
